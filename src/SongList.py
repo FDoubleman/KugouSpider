@@ -42,7 +42,11 @@ class SongList:
         # hash = "E72A27BAB2E41E13E94422A068B33459"
         real_url = self.base_url + hash
         response = requests.get(real_url)
-        text = response.content.decode("unicode_escape")
+        print(real_url)
+        # text_1 = response.content.decode("unicode_escape")
+        text_1 = response.content.decode("utf-8").replace("\\\"","")
+        text = bytes(text_1,"unicode_escape").decode("unicode_escape")
+
         s_text = text.replace("\r\n", "")
         s_text = s_text.replace(" \"", " ")
         s_text = s_text.replace("\" ", " ")
@@ -55,8 +59,6 @@ class SongList:
         obj = json.loads(s_text, encoding="utf-8")
         song_name = obj['data']['audio_name']
         song_url = obj["data"]["play_url"]
-        print(obj["data"]["audio_name"])
-        print(obj["data"]["play_url"])
-        self.s_download.download(song_name, song_url)
-
-
+        print(song_name)
+        print(song_url)
+        # self.s_download.download(song_name, song_url)
