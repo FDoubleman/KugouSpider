@@ -14,10 +14,9 @@ def insert_file_rec(hash1, timelength2):
     con = connect_mysql_db()
     cur = con.cursor()
     try:
-
         sql = """INSERT INTO song_table(hash,
                  timelength)
-                 VALUES (hash1, timelength2)"""
+                 VALUES ('23121', '1000')"""
         cur.execute(sql)
         con.commit()
     except:
